@@ -13,7 +13,11 @@ export async function postApiCall(method: any) {
     for (const [key, value] of Object.entries(method.payload)) {
       formData.append(`${key}`, value);
     }
-    let response = axios.post(method.type, formData)
+    let response = axios.post(method.type, formData, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      }
+    });
 
     let responseJson = await (await response).data;
     console.log('response>>>>>>>>>>', responseJson);
